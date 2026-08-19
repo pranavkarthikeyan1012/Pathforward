@@ -1,0 +1,6 @@
+{
+  "name": "PathForward",
+  "description": "PathForward is an AI-powered career decision and execution platform designed specifically for engineering students.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
