@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { Send, User as UserIcon, Bot, Mic, Loader2, Play, CircleDot, BrainCircuit, Activity } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -14,6 +15,10 @@ interface InterviewTurn {
 
 export default function Interview() {
   const { user, recommendation } = useApp();
+  const location = useLocation();
+  const targetRole = location.state?.role || recommendation?.primaryPath || user?.careerPath || 'Software Engineering';
+  const targetSector = location.state?.sector || '';
+
   const [isActive, setIsActive] = useState(false);
   const [focus, setFocus] = useState<'Technical' | 'Behavioral'>('Technical');
   const [history, setHistory] = useState<InterviewTurn[]>([]);
@@ -40,7 +45,7 @@ export default function Interview() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          careerPath: recommendation?.primaryPath || 'Software Engineering',
+          careerPath: targetRole,
           focus,
           history: [] 
         })
@@ -84,7 +89,7 @@ export default function Interview() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          careerPath: recommendation?.primaryPath || 'Software Engineering',
+          careerPath: targetRole,
           focus,
           history: apiHistory 
         })
@@ -135,7 +140,8 @@ export default function Interview() {
           <div>
             <h2 className="font-bold tracking-widest uppercase text-app-text text-sm">Mock Interview Module</h2>
             <p className="text-[10px] uppercase font-mono tracking-widest text-app-muted flex items-center gap-1 mt-0.5">
-              Target: {recommendation?.primaryPath || 'Software Engineering'}
+              Target: <span className="text-app-accent font-bold">{targetRole}</span>
+              {targetSector && <span className="text-app-muted">({targetSector})</span>}
             </p>
           </div>
         </div>

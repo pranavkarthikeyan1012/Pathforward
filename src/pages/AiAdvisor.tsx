@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { Send, User as UserIcon, Bot, Lightbulb, Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -12,6 +13,9 @@ interface Message {
 
 export default function AiAdvisor() {
   const { user, roadmap, recommendation } = useApp();
+  const location = useLocation();
+  const initialPromptProcessed = useRef(false);
+
   const [messages, setMessages] = useState<Message[]>([{
     id: '1',
     role: 'model',
@@ -83,6 +87,13 @@ export default function AiAdvisor() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (location.state?.prompt && !initialPromptProcessed.current) {
+      initialPromptProcessed.current = true;
+      handleSend(location.state.prompt);
+    }
+  }, [location.state]);
 
   return (
     <div className="max-w-4xl mx-auto h-[calc(100vh-6rem)] flex flex-col bg-app-panel rounded-lg border border-app-border shadow-inner overflow-hidden">

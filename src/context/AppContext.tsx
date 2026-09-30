@@ -9,7 +9,7 @@ interface AppState {
 }
 
 interface AppContextType extends AppState {
-  login: (user: User) => void;
+  login: (user?: User) => void;
   logout: () => void;
   updateUser: (data: Partial<User>) => void;
   setRecommendation: (rec: CareerRecommendation) => void;
