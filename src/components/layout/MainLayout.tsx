@@ -23,8 +23,8 @@ export const MainLayout: React.FC = () => {
       <div className="flex-1 flex flex-col h-screen overflow-hidden pb-16 md:pb-0">
         {/* Mobile Header */}
         <header className="md:hidden h-16 border-b border-app-border bg-app-panel flex items-center justify-between px-4 sticky top-0 z-10 shrink-0">
-          <div className="flex items-center gap-2 font-bold text-sm text-white tracking-widest uppercase">
-            <div className="w-6 h-6 rounded-sm bg-[#0ea5e9] flex items-center justify-center text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]">
+          <div className="flex items-center gap-2 font-bold text-sm text-app-text tracking-widest uppercase">
+            <div className="w-6 h-6 rounded-sm bg-app-accent flex items-center justify-center text-app-text shadow-[0_0_15px_rgba(16,185,129,0.4)]">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
               </svg>

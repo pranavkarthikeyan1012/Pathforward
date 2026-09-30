@@ -4,17 +4,33 @@ import { useApp } from '../context/AppContext';
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const navigate = useNavigate();
   const { login } = useApp();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    login(); // Uses default user for demo
-    
-    if (isLogin) {
-      navigate('/dashboard');
-    } else {
+    if (!isLogin) {
+      // In a real app we'd create the user. Here we just set their initial name in state and go to onboarding.
+      // We'll pass it to onboarding or use default for demo.
+      const newUser = {
+        id: 'new-' + Date.now(),
+        name: formData.name || 'New User',
+        email: formData.email,
+        college: 'Not Set',
+        branch: 'Not Set',
+        semester: '1',
+        cgpa: '0.0',
+        skills: [],
+        projects: [],
+        certifications: [],
+        badges: [],
+      };
+      login(newUser);
       navigate('/onboarding');
+    } else {
+      login(); // Uses default user for demo
+      navigate('/dashboard');
     }
   };
 
@@ -31,18 +47,18 @@ export default function Auth() {
         <div className="absolute top-0 right-0 w-64 h-64 bg-app-accent/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
 
         <div className="flex justify-center mb-8 relative z-10">
-          <div className="w-12 h-12 rounded bg-[#0ea5e9]/10 border border-[#0ea5e9]/30 flex items-center justify-center text-app-accent shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+          <div className="w-12 h-12 rounded bg-app-accent/10 border border-app-accent/30 flex items-center justify-center text-app-accent shadow-[0_0_15px_rgba(16,185,129,0.2)]">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
           </div>
         </div>
 
-        <h2 className="text-xl font-bold text-center tracking-widest uppercase text-white mb-2 relative z-10">
+        <h2 className="text-xl font-bold text-center tracking-widest uppercase text-app-text mb-2 relative z-10">
           {isLogin ? 'Authenticate' : 'Initialize Profile'}
         </h2>
         <p className="text-center text-app-muted font-mono text-xs uppercase tracking-widest mb-8 relative z-10">
-          {isLogin ? 'Enter credentials to access mainframe.' : 'Begin onboarding sequence.'}
+          {isLogin ? 'Enter credentials to access mainframe.' : 'Create an account to begin your journey.'}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
@@ -52,7 +68,9 @@ export default function Auth() {
               <input 
                 type="text" 
                 required
-                className="w-full px-4 py-3 rounded bg-app-bg border border-app-border font-mono text-sm text-white focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(56,189,248,0.2)] transition-all uppercase tracking-widest placeholder-app-muted/50"
+                value={formData.name}
+                onChange={e => setFormData({...formData, name: e.target.value})}
+                className="w-full px-4 py-3 rounded bg-app-bg border border-app-border font-mono text-sm text-app-text focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all uppercase tracking-widest placeholder-app-muted/50"
                 placeholder="ALEX JOHNSON"
               />
             </div>
@@ -63,7 +81,9 @@ export default function Auth() {
             <input 
               type="email" 
               required
-              className="w-full px-4 py-3 rounded bg-app-bg border border-app-border font-mono text-sm text-white focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(56,189,248,0.2)] transition-all uppercase tracking-widest placeholder-app-muted/50"
+              value={formData.email}
+              onChange={e => setFormData({...formData, email: e.target.value})}
+              className="w-full px-4 py-3 rounded bg-app-bg border border-app-border font-mono text-sm text-app-text focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all uppercase tracking-widest placeholder-app-muted/50"
               placeholder="ALEX@EXAMPLE.COM"
             />
           </div>
@@ -73,14 +93,16 @@ export default function Auth() {
             <input 
               type="password" 
               required
-              className="w-full px-4 py-3 rounded bg-app-bg border border-app-border font-mono text-sm text-white focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(56,189,248,0.2)] transition-all tracking-widest placeholder-app-muted/50"
+              value={formData.password}
+              onChange={e => setFormData({...formData, password: e.target.value})}
+              className="w-full px-4 py-3 rounded bg-app-bg border border-app-border font-mono text-sm text-app-text focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all tracking-widest placeholder-app-muted/50"
               placeholder="••••••••"
             />
           </div>
 
           <button 
             type="submit"
-            className="w-full py-3 bg-[#0ea5e9]/10 border border-[#0ea5e9]/30 text-app-accent rounded font-bold text-[10px] tracking-widest uppercase hover:bg-app-accent hover:text-white transition-all shadow-[0_0_15px_rgba(56,189,248,0.1)] mt-6"
+            className="w-full py-3 bg-app-accent/10 border border-app-accent/30 text-app-accent rounded font-bold text-[10px] tracking-widest uppercase hover:bg-app-accent hover:text-white transition-all shadow-[0_0_15px_rgba(16,185,129,0.1)] mt-6"
           >
             {isLogin ? 'Initialize Session' : 'Create Record'}
           </button>
@@ -95,7 +117,7 @@ export default function Auth() {
         <button 
           onClick={handleDemoGoogle}
           type="button"
-          className="mt-6 w-full py-3 bg-app-bg border border-app-border text-app-muted rounded font-bold text-[10px] tracking-widest uppercase hover:text-white hover:border-app-accent transition-colors flex items-center justify-center gap-3 relative z-10"
+          className="mt-6 w-full py-3 bg-app-bg border border-app-border text-app-muted rounded font-bold text-[10px] tracking-widest uppercase hover:text-app-text hover:border-app-accent transition-colors flex items-center justify-center gap-3 relative z-10"
         >
           <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24">
             <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -110,7 +132,7 @@ export default function Auth() {
           {isLogin ? "No profile found? " : "Profile exists? "}
           <button 
             onClick={() => setIsLogin(!isLogin)}
-            className="text-app-accent font-bold hover:text-white transition-colors"
+            className="text-app-accent font-bold hover:text-app-text transition-colors"
           >
             {isLogin ? 'Sign up' : 'Log in'}
           </button>

@@ -86,12 +86,12 @@ export default function Onboarding() {
       <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center p-4">
         <div className="w-24 h-24 relative mb-8">
           <div className="absolute inset-0 border border-app-border rounded"></div>
-          <div className="absolute inset-0 border border-app-accent rounded animate-pulse shadow-[0_0_15px_rgba(56,189,248,0.5)]"></div>
+          <div className="absolute inset-0 border border-app-accent rounded animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.5)]"></div>
           <div className="absolute inset-0 flex items-center justify-center">
              <Brain className="w-8 h-8 text-app-accent animate-pulse" />
           </div>
         </div>
-        <h2 className="text-xl font-bold uppercase tracking-widest text-white mb-2">{loadingText}</h2>
+        <h2 className="text-xl font-bold uppercase tracking-widest text-app-text mb-2">{loadingText}</h2>
         <p className="text-[10px] font-mono tracking-widest uppercase text-app-muted">System is processing your parameters...</p>
       </div>
     );
@@ -109,7 +109,7 @@ export default function Onboarding() {
           </div>
           <div className="w-full h-1 bg-app-panel border border-app-border overflow-hidden">
             <div 
-              className="h-full bg-app-accent transition-all duration-500 ease-out shadow-[0_0_10px_rgba(56,189,248,0.8)]"
+              className="h-full bg-app-accent transition-all duration-500 ease-out shadow-[0_0_10px_rgba(16,185,129,0.8)]"
               style={{ width: `${(step / 6) * 100}%` }}
             ></div>
           </div>
@@ -121,23 +121,23 @@ export default function Onboarding() {
           {step === 1 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative z-10">
               <div>
-                <h2 className="text-xl font-bold uppercase tracking-widest text-white mb-2">Node Identification</h2>
+                <h2 className="text-xl font-bold uppercase tracking-widest text-app-text mb-2">Node Identification</h2>
                 <p className="text-[10px] font-mono tracking-widest uppercase text-app-muted">Establish base parameters.</p>
               </div>
               <div className="space-y-6">
                 <div>
                   <label className="block text-[10px] font-mono tracking-widest uppercase text-app-accent mb-2">Institution Origin</label>
-                  <input type="text" value={formData.college} onChange={e => setFormData({...formData, college: e.target.value})} className="w-full p-3 rounded bg-app-bg text-white border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs transition-all" placeholder="E.G. NATIONAL INSTITUTE OF TECHNOLOGY" />
+                  <input type="text" value={formData.college} onChange={e => setFormData({...formData, college: e.target.value})} className="w-full p-3 rounded bg-app-bg text-app-text border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs transition-all" placeholder="E.G. NATIONAL INSTITUTE OF TECHNOLOGY" />
                 </div>
                 <div>
                   <label className="block text-[10px] font-mono tracking-widest uppercase text-app-accent mb-2">Engineering Sector</label>
-                  <input type="text" value={formData.branch} onChange={e => setFormData({...formData, branch: e.target.value})} className="w-full p-3 rounded bg-app-bg text-white border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs transition-all" placeholder="E.G. COMPUTER SCIENCE" />
+                  <input type="text" value={formData.branch} onChange={e => setFormData({...formData, branch: e.target.value})} className="w-full p-3 rounded bg-app-bg text-app-text border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs transition-all" placeholder="E.G. COMPUTER SCIENCE" />
                 </div>
                 <div>
                   <label className="block text-[10px] font-mono tracking-widest uppercase text-app-accent mb-2">Current Phase</label>
-                  <select value={formData.semester} onChange={e => setFormData({...formData, semester: e.target.value})} className="w-full p-3 rounded bg-app-bg text-white border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs transition-all appearance-none">
+                  <select value={formData.semester} onChange={e => setFormData({...formData, semester: e.target.value})} className="w-full p-3 rounded bg-app-bg text-app-text border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs transition-all appearance-none">
                     <option value="" className="bg-app-panel text-app-muted">SELECT PHASE</option>
-                    {[1,2,3,4,5,6,7,8].map(s => <option key={s} value={s} className="bg-app-panel text-white">PHASE {s}</option>)}
+                    {[1,2,3,4,5,6,7,8].map(s => <option key={s} value={s} className="bg-app-panel text-app-text">PHASE {s}</option>)}
                   </select>
                 </div>
               </div>
@@ -147,13 +147,13 @@ export default function Onboarding() {
           {step === 2 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative z-10">
               <div>
-                <h2 className="text-xl font-bold uppercase tracking-widest text-white mb-2">Academic Telemetry</h2>
+                <h2 className="text-xl font-bold uppercase tracking-widest text-app-text mb-2">Academic Telemetry</h2>
                 <p className="text-[10px] font-mono tracking-widest uppercase text-app-muted">Input current performance metrics.</p>
               </div>
               <div className="space-y-6">
                 <div>
                   <label className="block text-[10px] font-mono tracking-widest uppercase text-app-accent mb-2">Current CGPA (out of 10)</label>
-                  <input type="number" step="0.1" value={formData.cgpa} onChange={e => setFormData({...formData, cgpa: e.target.value})} className="w-full p-3 rounded bg-app-bg text-white border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs transition-all" placeholder="E.G. 8.5" />
+                  <input type="number" step="0.1" value={formData.cgpa} onChange={e => setFormData({...formData, cgpa: e.target.value})} className="w-full p-3 rounded bg-app-bg text-app-text border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs transition-all" placeholder="E.G. 8.5" />
                 </div>
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function Onboarding() {
           {step === 3 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative z-10">
               <div>
-                <h2 className="text-xl font-bold uppercase tracking-widest text-white mb-2">Skill Arsenal</h2>
+                <h2 className="text-xl font-bold uppercase tracking-widest text-app-text mb-2">Skill Arsenal</h2>
                 <p className="text-[10px] font-mono tracking-widest uppercase text-app-muted">Select acquired technical competencies.</p>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -172,7 +172,7 @@ export default function Onboarding() {
                     onClick={() => toggleArrayItem('skills', skill)}
                     className={`px-4 py-2 rounded text-[10px] font-mono tracking-widest uppercase border transition-all ${
                       formData.skills.includes(skill)
-                        ? 'bg-[#0ea5e9]/10 text-app-accent border-app-accent shadow-[0_0_10px_rgba(56,189,248,0.2)]'
+                        ? 'bg-app-accent/10 text-app-accent border-app-accent shadow-[0_0_10px_rgba(16,185,129,0.2)]'
                         : 'bg-app-bg text-app-muted border-app-border hover:border-app-muted'
                     }`}
                   >
@@ -186,7 +186,7 @@ export default function Onboarding() {
           {step === 4 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative z-10">
               <div>
-                <h2 className="text-xl font-bold uppercase tracking-widest text-white mb-2">Target Affinity</h2>
+                <h2 className="text-xl font-bold uppercase tracking-widest text-app-text mb-2">Target Affinity</h2>
                 <p className="text-[10px] font-mono tracking-widest uppercase text-app-muted">Identify core areas of interest.</p>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -196,7 +196,7 @@ export default function Onboarding() {
                     onClick={() => toggleArrayItem('interests', interest)}
                     className={`px-4 py-2 rounded text-[10px] font-mono tracking-widest uppercase border transition-all ${
                       formData.interests.includes(interest)
-                        ? 'bg-[#0ea5e9]/10 text-app-accent border-app-accent shadow-[0_0_10px_rgba(56,189,248,0.2)]'
+                        ? 'bg-app-accent/10 text-app-accent border-app-accent shadow-[0_0_10px_rgba(16,185,129,0.2)]'
                         : 'bg-app-bg text-app-muted border-app-border hover:border-app-muted'
                     }`}
                   >
@@ -210,7 +210,7 @@ export default function Onboarding() {
           {step === 5 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative z-10">
               <div>
-                <h2 className="text-xl font-bold uppercase tracking-widest text-white mb-2">Trajectory Priorities</h2>
+                <h2 className="text-xl font-bold uppercase tracking-widest text-app-text mb-2">Trajectory Priorities</h2>
                 <p className="text-[10px] font-mono tracking-widest uppercase text-app-muted">Define variables for outcome optimization.</p>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -234,7 +234,7 @@ export default function Onboarding() {
           {step === 6 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative z-10">
               <div>
-                <h2 className="text-xl font-bold uppercase tracking-widest text-white mb-2">Manual Override</h2>
+                <h2 className="text-xl font-bold uppercase tracking-widest text-app-text mb-2">Manual Override</h2>
                 <p className="text-[10px] font-mono tracking-widest uppercase text-app-muted">Provide additional context in unstructured format.</p>
               </div>
               <div>
@@ -242,7 +242,7 @@ export default function Onboarding() {
                   value={formData.goals}
                   onChange={e => setFormData({...formData, goals: e.target.value})}
                   rows={4}
-                  className="w-full p-4 rounded bg-app-bg text-white border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs resize-none transition-all"
+                  className="w-full p-4 rounded bg-app-bg text-app-text border border-app-border focus:ring-1 focus:ring-app-accent focus:border-app-accent outline-none font-mono text-xs resize-none transition-all"
                   placeholder="E.G. I WANT TO SECURE A POSITION AS A SYSTEMS ARCHITECT..."
                 />
               </div>
@@ -254,7 +254,7 @@ export default function Onboarding() {
               onClick={prevStep}
               disabled={step === 1}
               className={`flex items-center gap-2 px-5 py-2.5 rounded font-mono text-[10px] tracking-widest uppercase border transition-colors ${
-                step === 1 ? 'text-app-bg border-app-bg cursor-not-allowed' : 'text-app-muted border-app-border hover:text-white hover:border-app-muted'
+                step === 1 ? 'text-app-bg border-app-bg cursor-not-allowed' : 'text-app-muted border-app-border hover:text-app-text hover:border-app-muted'
               }`}
             >
               <ArrowLeft className="w-3 h-3" /> Revert
@@ -263,14 +263,14 @@ export default function Onboarding() {
             {step < 6 ? (
               <button
                 onClick={nextStep}
-                className="flex items-center gap-2 px-6 py-2.5 bg-app-bg text-white border border-app-border rounded font-mono text-[10px] tracking-widest uppercase hover:border-app-accent hover:text-app-accent transition-all"
+                className="flex items-center gap-2 px-6 py-2.5 bg-app-bg text-app-text border border-app-border rounded font-mono text-[10px] tracking-widest uppercase hover:border-app-accent hover:text-app-accent transition-all"
               >
                 Proceed <ArrowRight className="w-3 h-3" />
               </button>
             ) : (
               <button
                 onClick={handleSubmit}
-                className="flex items-center gap-2 px-8 py-3 bg-[#0ea5e9]/10 text-app-accent border border-[#0ea5e9]/30 rounded font-bold text-xs tracking-widest uppercase hover:bg-app-accent hover:text-white transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                className="flex items-center gap-2 px-8 py-3 bg-app-accent/10 text-app-accent border border-app-accent/30 rounded font-bold text-xs tracking-widest uppercase hover:bg-app-accent hover:text-white transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]"
               >
                 Run Diagnostics <Brain className="w-4 h-4" />
               </button>

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { Send, User as UserIcon, Bot, Lightbulb, Loader2 } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import { cn } from '../lib/utils';
 
 interface Message {
@@ -89,13 +90,13 @@ export default function AiAdvisor() {
       {/* Header */}
       <div className="px-6 py-4 border-b border-app-border flex items-center justify-between bg-app-panel z-10 shadow-[0_5px_15px_rgba(0,0,0,0.2)]">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded border border-[#0ea5e9]/30 bg-[#0ea5e9]/10 flex items-center justify-center text-app-accent shadow-[0_0_15px_rgba(14,165,233,0.2)]">
+          <div className="w-10 h-10 rounded border border-app-accent/30 bg-app-accent/10 flex items-center justify-center text-app-accent shadow-[0_0_15px_rgba(16,185,129,0.2)]">
             <Bot className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="font-bold tracking-widest uppercase text-white text-sm">PathForward AI</h2>
+            <h2 className="font-bold tracking-widest uppercase text-app-text text-sm">PathForward AI</h2>
             <p className="text-[10px] uppercase font-mono tracking-widest text-app-accent flex items-center gap-1 mt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-app-accent animate-pulse shadow-[0_0_8px_rgba(56,189,248,1)]"></span> Link Active
+              <span className="w-1.5 h-1.5 rounded-full bg-app-accent animate-pulse shadow-[0_0_8px_rgba(16,185,129,1)]"></span> Link Active
             </p>
           </div>
         </div>
@@ -108,24 +109,30 @@ export default function AiAdvisor() {
             
             <div className={cn(
               "w-8 h-8 rounded flex items-center justify-center shrink-0 mt-1 border",
-              msg.role === 'user' ? "bg-app-panel border-app-border text-white" : "bg-[#0ea5e9]/10 border-[#0ea5e9]/30 text-app-accent"
+              msg.role === 'user' ? "bg-app-panel border-app-border text-app-text" : "bg-app-accent/10 border-app-accent/30 text-app-accent"
             )}>
               {msg.role === 'user' ? <UserIcon className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
             </div>
             
             <div className={cn(
-              "px-5 py-3.5 text-sm leading-relaxed font-mono",
+              "px-5 py-3.5 text-sm leading-relaxed font-mono overflow-hidden",
               msg.role === 'user' 
-                ? "bg-app-panel text-white rounded-l-lg rounded-br-lg border border-app-border shadow-inner" 
-                : "bg-app-bg border border-app-border shadow-inner text-app-muted rounded-r-lg rounded-bl-lg border-l-2 border-l-app-accent"
+                ? "bg-app-accent text-white rounded-l-lg rounded-br-lg shadow-sm" 
+                : "bg-app-panel border border-app-border shadow-sm text-app-text rounded-r-lg rounded-bl-lg border-l-4 border-l-app-accent markdown-body"
             )}>
-              {msg.content}
+              {msg.role === 'model' ? (
+                <div className="prose  prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-app-panel prose-pre:border prose-pre:border-app-border">
+                  <ReactMarkdown>{msg.content}</ReactMarkdown>
+                </div>
+              ) : (
+                msg.content
+              )}
             </div>
           </div>
         ))}
         {isLoading && (
           <div className="flex gap-4 max-w-[85%]">
-            <div className="w-8 h-8 rounded bg-[#0ea5e9]/10 border border-[#0ea5e9]/30 text-app-accent flex items-center justify-center shrink-0 mt-1">
+            <div className="w-8 h-8 rounded bg-app-accent/10 border border-app-accent/30 text-app-accent flex items-center justify-center shrink-0 mt-1">
               <Bot className="w-4 h-4" />
             </div>
             <div className="px-5 py-3.5 bg-app-bg border border-app-border shadow-inner text-app-muted rounded-r-lg rounded-bl-lg border-l-2 border-l-app-accent flex items-center gap-2 font-mono text-xs">
@@ -145,7 +152,7 @@ export default function AiAdvisor() {
             <button
               key={prompt}
               onClick={() => handleSend(prompt)}
-              className="shrink-0 px-4 py-2 bg-app-bg hover:bg-[#0ea5e9]/10 text-app-muted hover:text-white text-[10px] uppercase font-mono tracking-widest rounded border border-app-border hover:border-[#0ea5e9]/40 transition-colors flex items-center gap-1.5"
+              className="shrink-0 px-4 py-2 bg-app-bg hover:bg-app-accent/10 text-app-muted hover:text-app-text text-[10px] uppercase font-mono tracking-widest rounded border border-app-border hover:border-app-accent/40 transition-colors flex items-center gap-1.5"
             >
               <Lightbulb className="w-3 h-3 text-app-accent" /> {prompt}
             </button>
@@ -161,12 +168,12 @@ export default function AiAdvisor() {
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder="ENTER COMMAND OR INQUIRY..."
-            className="w-full pl-4 pr-14 py-4 bg-app-bg border border-app-border rounded text-white font-mono text-xs focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(56,189,248,0.2)] transition-all placeholder-app-muted/50 uppercase tracking-widest"
+            className="w-full pl-4 pr-14 py-4 bg-app-bg border border-app-border rounded text-app-text font-mono text-xs focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all placeholder-app-muted/50 uppercase tracking-widest"
           />
           <button
             type="submit"
             disabled={!input.trim() || isLoading}
-            className="absolute right-2 p-2.5 bg-[#0ea5e9]/10 hover:bg-app-accent disabled:bg-app-bg disabled:text-app-muted disabled:border-app-border border border-[#0ea5e9]/30 text-app-accent hover:text-white rounded transition-colors"
+            className="absolute right-2 p-2.5 bg-app-accent/10 hover:bg-app-accent disabled:bg-app-bg disabled:text-app-muted disabled:border-app-border border border-app-accent/30 text-app-accent hover:text-white rounded transition-colors"
           >
             <Send className="w-4 h-4" />
           </button>

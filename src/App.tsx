@@ -16,6 +16,8 @@ const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Discover = React.lazy(() => import('./pages/Discover'));
 const Roadmap = React.lazy(() => import('./pages/Roadmap'));
 const Network = React.lazy(() => import('./pages/Network'));
+const Analytics = React.lazy(() => import('./pages/Analytics'));
+const Interview = React.lazy(() => import('./pages/Interview'));
 const AiAdvisor = React.lazy(() => import('./pages/AiAdvisor'));
 const Profile = React.lazy(() => import('./pages/Profile'));
 const CareerTrack = React.lazy(() => import('./pages/CareerTrack'));
@@ -23,7 +25,7 @@ const CareerTrack = React.lazy(() => import('./pages/CareerTrack'));
 // Fallback loader
 const Loader = () => (
   <div className="flex items-center justify-center h-screen bg-slate-50">
-    <div className="w-8 h-8 border-4 border-sky-500 border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
@@ -39,7 +41,9 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/discover" element={<Discover />} />
             <Route path="/roadmap" element={<Roadmap />} />
+            <Route path="/interview" element={<Interview />} />
             <Route path="/network" element={<Network />} />
+            <Route path="/analytics" element={<Analytics />} />
             <Route path="/advisor" element={<AiAdvisor />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/career/:trackId" element={<CareerTrack />} />

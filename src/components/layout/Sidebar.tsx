@@ -5,8 +5,10 @@ import {
   Compass, 
   Map, 
   Users, 
-  MessageSquare, 
+  MessageSquare,
+  PieChart,
   User, 
+  Mic2,
   Settings,
   LogOut
 } from 'lucide-react';
@@ -26,7 +28,9 @@ export const Sidebar: React.FC = () => {
     { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
     { name: 'Discover', icon: Compass, path: '/discover' },
     { name: 'My Roadmap', icon: Map, path: '/roadmap' },
+    { name: 'Mock Interview', icon: Mic2, path: '/interview' },
     { name: 'Network', icon: Users, path: '/network' },
+    { name: 'Analytics', icon: PieChart, path: '/analytics' },
     { name: 'AI Advisor', icon: MessageSquare, path: '/advisor' },
   ];
 
@@ -37,8 +41,8 @@ export const Sidebar: React.FC = () => {
   return (
     <aside className="w-64 h-screen bg-app-bg border-r border-app-border flex flex-col hidden md:flex sticky top-0">
       <div className="p-6">
-        <div className="flex items-center gap-2 text-white font-bold text-xl tracking-widest uppercase">
-          <div className="w-8 h-8 rounded-sm bg-[#0ea5e9] flex items-center justify-center text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]">
+        <div className="flex items-center gap-2 text-app-text font-bold text-xl tracking-widest uppercase">
+          <div className="w-8 h-8 rounded-sm bg-app-accent flex items-center justify-center text-app-text shadow-[0_0_15px_rgba(16,185,129,0.4)]">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
@@ -57,7 +61,7 @@ export const Sidebar: React.FC = () => {
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-mono uppercase tracking-widest transition-all duration-200 border border-transparent",
                 isActive 
                   ? "bg-app-panel border-app-border text-app-accent shadow-inner" 
-                  : "text-app-muted hover:bg-app-panel hover:text-white hover:border-app-border"
+                  : "text-app-muted hover:bg-app-panel hover:text-app-text hover:border-app-border"
               )
             }
           >
@@ -77,7 +81,7 @@ export const Sidebar: React.FC = () => {
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-mono uppercase tracking-widest transition-all duration-200 border border-transparent",
                 isActive 
                   ? "bg-app-panel border-app-border text-app-accent shadow-inner" 
-                  : "text-app-muted hover:bg-app-panel hover:text-white hover:border-app-border"
+                  : "text-app-muted hover:bg-app-panel hover:text-app-text hover:border-app-border"
               )
             }
           >

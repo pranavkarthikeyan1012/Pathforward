@@ -41,7 +41,7 @@ export default function Network() {
   return (
     <div className="max-w-6xl mx-auto pb-12 animate-in fade-in duration-500">
       <div className="mb-8">
-        <h1 className="text-xl font-bold tracking-widest uppercase text-white mb-2">Network Grid</h1>
+        <h1 className="text-xl font-bold tracking-widest uppercase text-app-text mb-2">Network Grid</h1>
         <p className="text-app-muted font-mono text-xs uppercase tracking-widest">Establish connections with alumni, seniors, and faculty.</p>
       </div>
 
@@ -54,7 +54,7 @@ export default function Network() {
             placeholder="SEARCH BY NAME, ROLE, OR COMPANY..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-app-bg border border-app-border rounded font-mono text-xs text-white focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(56,189,248,0.2)] transition-all placeholder-app-muted/50 tracking-widest uppercase"
+            className="w-full pl-10 pr-4 py-3 bg-app-bg border border-app-border rounded font-mono text-xs text-app-text focus:outline-none focus:border-app-accent focus:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all placeholder-app-muted/50 tracking-widest uppercase"
           />
         </div>
         <div className="flex gap-2 overflow-x-auto hide-scrollbar">
@@ -63,7 +63,7 @@ export default function Network() {
               key={f}
               onClick={() => setFilter(f)}
               className={`px-4 py-3 rounded text-[10px] font-mono tracking-widest uppercase whitespace-nowrap transition-colors border ${
-                filter === f ? 'bg-[#0ea5e9]/10 text-app-accent border-[#0ea5e9]/30 shadow-[0_0_10px_rgba(56,189,248,0.2)]' : 'bg-app-bg text-app-muted border-app-border hover:bg-app-panel hover:text-white'
+                filter === f ? 'bg-app-accent/10 text-app-accent border-app-accent/30 shadow-[0_0_10px_rgba(16,185,129,0.2)]' : 'bg-app-bg text-app-muted border-app-border hover:bg-app-panel hover:text-app-text'
               }`}
             >
               {f}
@@ -75,13 +75,13 @@ export default function Network() {
       {/* Mentor Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredMentors.map(mentor => (
-          <div key={mentor.id} className="bg-app-panel rounded-lg p-6 border border-app-border shadow-inner hover:border-[#0ea5e9]/40 hover:shadow-[0_0_15px_rgba(56,189,248,0.1)] transition-all flex flex-col group">
+          <div key={mentor.id} className="bg-app-panel rounded-lg p-6 border border-app-border shadow-inner hover:border-app-accent/40 hover:shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all flex flex-col group">
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 rounded border border-app-border bg-app-bg flex items-center justify-center text-sm font-mono text-app-muted shrink-0 group-hover:border-app-accent group-hover:text-app-accent transition-colors">
                 {getInitials(mentor.name)}
               </div>
               <div>
-                <h3 className="font-bold tracking-widest uppercase text-white leading-tight text-sm">{mentor.name}</h3>
+                <h3 className="font-bold tracking-widest uppercase text-app-text leading-tight text-sm">{mentor.name}</h3>
                 <p className="text-[10px] font-mono uppercase tracking-widest text-app-accent mt-1">{mentor.role}</p>
                 <p className="text-[10px] font-mono uppercase tracking-widest text-app-muted mt-1">{mentor.company} // {mentor.year}</p>
               </div>
@@ -106,12 +106,12 @@ export default function Network() {
                 className={`flex items-center justify-center gap-2 py-2 rounded text-[10px] font-bold tracking-widest uppercase transition-all border ${
                   requested[mentor.id] 
                     ? 'bg-[#10b981]/10 text-app-success border-[#10b981]/30 opacity-70' 
-                    : 'bg-[#0ea5e9]/10 text-app-accent hover:bg-app-accent hover:text-white border-[#0ea5e9]/30'
+                    : 'bg-app-accent/10 text-app-accent hover:bg-app-accent hover:text-app-text border-app-accent/30'
                 }`}
               >
                 {requested[mentor.id] ? 'Pending' : <><UserPlus className="w-3 h-3" /> Connect</>}
               </button>
-              <button className="flex items-center justify-center gap-2 py-2 bg-app-bg border border-app-border text-app-muted hover:text-white hover:border-app-accent rounded text-[10px] font-bold tracking-widest uppercase transition-colors">
+              <button className="flex items-center justify-center gap-2 py-2 bg-app-bg border border-app-border text-app-muted hover:text-app-text hover:border-app-accent rounded text-[10px] font-bold tracking-widest uppercase transition-colors">
                 <MessageSquare className="w-3 h-3" /> Message
               </button>
             </div>
@@ -122,7 +122,7 @@ export default function Network() {
       {filteredMentors.length === 0 && (
         <div className="text-center py-24 bg-app-panel rounded-lg border border-app-border shadow-inner">
           <Search className="w-10 h-10 text-app-muted mx-auto mb-4 opacity-50" />
-          <h3 className="text-sm tracking-widest uppercase font-bold text-white mb-2">No signals found</h3>
+          <h3 className="text-sm tracking-widest uppercase font-bold text-app-text mb-2">No signals found</h3>
           <p className="text-app-muted font-mono text-xs">Adjust telemetry parameters to scan again.</p>
         </div>
       )}

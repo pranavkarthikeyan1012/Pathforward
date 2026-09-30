@@ -27,7 +27,7 @@ const defaultUser: User = {
   cgpa: '8.4',
   skills: ['Python', 'Java', 'SQL'],
   projects: ['Portfolio Website'],
-  certifications: [],
+  certifications: ['AWS Cloud Practitioner'],
   badges: [],
 };
 
